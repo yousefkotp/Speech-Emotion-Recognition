@@ -161,3 +161,6 @@ cython_debug/
 
 
 /dataset/*
+processed/test.npy
+processed/train.npy
+processed/val.npy
