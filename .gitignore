@@ -171,3 +171,4 @@ processed/x_val.npy
 processed/y_test.npy
 processed/y_train.npy
 processed/y_val.npy
+*.npy
