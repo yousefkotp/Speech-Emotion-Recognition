@@ -173,3 +173,4 @@ processed/y_train.npy
 processed/y_val.npy
 *.npy
 /augmented/*
+.vscode/settings.json
