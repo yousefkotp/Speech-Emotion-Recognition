@@ -160,18 +160,8 @@ cython_debug/
 #.idea/
 
 
-/dataset/*
-processed/test.npy
-processed/train.npy
-processed/val.npy
-processed/dataFeatures.npy
-processed/x_test.npy
-processed/x_train.npy
-processed/x_val.npy
-processed/y_test.npy
-processed/y_train.npy
-processed/y_val.npy
+/dataset/*.wav
 *.npy
-/augmented/*
 .vscode/settings.json
 *.pth
+*.wav
