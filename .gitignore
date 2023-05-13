@@ -174,3 +174,4 @@ processed/y_val.npy
 *.npy
 /augmented/*
 .vscode/settings.json
+*.pth
