@@ -166,3 +166,4 @@ cython_debug/
 *.pth
 *.wav
 .vscode/settings.json
+*.pt
