@@ -1,10 +1,9 @@
 # Speech-Emotion-Recognition
-Speech is the most natural way of expressing ourselves as humans. It is only natural
-then to extend this communication medium to computer applications. We define
-speech emotion recognition (SER) systems as a collection of methodologies that
-process and classify speech signals to detect the embedded emotions. 
+Speech is the most natural way of expressing ourselves as humans. It is only natural then to extend this communication medium to computer applications. We define speech emotion recognition (SER) systems as a collection of methodologies that process and classify speech signals to detect the embedded emotions. 
 
 This project is all about experimenting different set of features for audio representation and different CNN-based architectures for building a good speech emotion recognition (SER) system.
+
+**Note:** This README.md file contains an overview of the project, it is recommended to open [notebook](https://github.com/yousefkotp/Speech-Emotion-Recognition/blob/main/main.ipynb) as it contains the code and further explanation for the results.
 
 ## Table of Contents
 - [Speech-Emotion-Recognition](#speech-emotion-recognition)
@@ -29,8 +28,8 @@ This project is all about experimenting different set of features for audio repr
       - [Model Architecture](#model-architecture-2)
       - [Training](#training-1)
       - [Classification Report](#classification-report-1)
-  - [Results](#results)
   - [Remarks](#remarks)
+  - [Results](#results)
   - [Contributors](#contributors)
 
 ## Dataset
@@ -70,9 +69,9 @@ We will process the audio files (wav files) mainly using `librosa` library. We w
 
 When selecting the window size and hop size for audio classification tasks using a convolutional neural network (CNN), it's important to consider several factors, including the length of the audio samples, the nature of the audio signal, and the computational resources available. Here are some general guidelines we will follow:
 
-- Window Size: The window size determines the amount of audio data that is processed at a time. A larger window size captures more information about the audio signal, but also requires more computational resources. For speech signals, a window size of around 20-30 ms (320-480 samples for 16 kHz audio) is often used, as it captures enough information about individual phonemes while still allowing for some temporal resolution.
-- Hop Size: The hop size determines the amount of overlap between adjacent windows. A smaller hop size provides more temporal resolution but requires more computational resources, while a larger hop size provides better computational efficiency but can miss short-term changes in the audio signal. A common hop size is half the window size, i.e. 10-15 ms (160-240 samples for 16 kHz audio).
-- Number of Mels: for the Mel Spectrogram, the number of Mels determines the number of frequency bands that are used to represent the audio signal. A larger number of Mels captures more information about the audio signal, but also requires more computational resources. For speech signals, a number of Mels between 40 and 80 is often used, as it captures enough information about the audio signal while still allowing for some computational efficiency.
+- **Window Size:** The window size determines the amount of audio data that is processed at a time. A larger window size captures more information about the audio signal, but also requires more computational resources. For speech signals, a window size of around 20-30 ms (320-480 samples for 16 kHz audio) is often used, as it captures enough information about individual phonemes while still allowing for some temporal resolution.
+- **Hop Size:** The hop size determines the amount of overlap between adjacent windows. A smaller hop size provides more temporal resolution but requires more computational resources, while a larger hop size provides better computational efficiency but can miss short-term changes in the audio signal. A common hop size is half the window size, i.e. 10-15 ms (160-240 samples for 16 kHz audio).
+- **Number of Mels:** for the Mel Spectrogram, the number of Mels determines the number of frequency bands that are used to represent the audio signal. A larger number of Mels captures more information about the audio signal, but also requires more computational resources. For speech signals, a number of Mels between 40 and 80 is often used, as it captures enough information about the audio signal while still allowing for some computational efficiency.
 
 Mainly, the general formula for calculating the values of the window size and hop size is as follows:
 ```python
@@ -92,18 +91,46 @@ For this project, we will build three new models:
 - **ExpoNet:** A CNN model that takes Zero Crossing Rate, Energy and Mel Spectrogram all flattened together as a 1D input and uses a series of convolutional layers with squared size kernels to extract features from the audio signal. The output of the convolutional layers is then flattened and fed to a series of fully-connected layers to classify the audio signal.
 
 ### DummyNet
-As explained from its name, it is one of the most basic CNN models that takes either Zero Crossing Rate, Energy or both or even flattened Mel Spectogram as input. 
+As explained from its name, it is one of the most basic CNN models that takes either Zero Crossing Rate, Energy or both or even flattened Mel Spectogram as input.
+
 #### Model Architecture
+Convolutional Layers:
+- First Convolutional Layer: 1D convolutional layer with 1 input channel, 512 output channels, and a kernel size of 5 and stride of 1.
+- First Pooling Layer: Max pooling layer with a kernel size of 5 and stride of 2.
+- Second Convolutional Layer: 1D convolutional layer with 512 input channels, 512 output channels, and a kernel size of 5 and stride of 1.
+- Second Pooling Layer: Max pooling layer with a kernel size of 5 and stride of 2.
+- Third Convolutional Layer: 1D convolutional layer with 512 input channels, 128 output channels, and a kernel size of 5 and stride of 1.
+- Third Pooling Layer: Max pooling layer with a kernel size of 5 and stride of 2.
+- Flatten: Flattens the input tensor to a 1-dimensional vector.
+- First Fully Connected Layer: Fully connected (linear) layer with an input size of `input shape` * 128 and an output size of 256.
+- Second Fully Connected Layer: Fully connected (linear) layer with an input size of 256 and an output size of 6.
+- Softmax activation is applied to the last layer to produce the output probabilities.
+
+RELU activation is applied to the output of each convolutional and fully connected layer, except for the last layer.
 
 #### Using Zero Crossing Rate
 
+<p align="center">
+  <img src="Photos/zcr_report.png"/>
+</p>
+
 #### Using Energy
+
+<p align="center">
+  <img src="Photos/energy_report.png"/>
+</p>
 
 #### Using Zero Crossing Rate and Energy
 
+<p align="center">
+  <img src="Photos/zcr_energy_report.png"/>
+</p>
+
 #### Using Mel Spectrogram
 
-
+<p align="center">
+  <img src="Photos/melspectogram_report.png"/>
+</p>
 
 
 ### RezoNet
@@ -112,7 +139,7 @@ RezoNet is a Deep-Net A Lightweight CNN-Based Speech Emotion Recognition Model. 
 #### Model Architecture
 
 <p align="center">
-  <img src="Photos/Deep-Net A Lightweight CNN-Based Speech.png"/>
+  <img src="Photos/Deep-Net.png"/>
 </p>
 
 #### Training
@@ -143,7 +170,7 @@ After the convolutional layers, the features are flattened using the `nn.Flatten
 The model can be modified to use `Log Softmax` instead of Softmax for faster computation and practicality reasons. However, using Softmax is not a problem in this case since that we are using a GPU to run the model.
 
 #### Training
-For audio processing, we used window size = 512, hop size = 160 and number of mel = 40. We used Adam optimizer with learning rate = 0.00001 and batch size = 8. We trained the model for 10 epochs and saved the best model based on validation accuracy. We used L2 regularization with weight decay = 0.001.
+For audio processing, we used window size = 512, hop size = 160 and number of mel = 40. We used Adam optimizer with learning rate = 0.00001 and batch size = 8. We trained the model for 10 epochs and saved the best model based on validation accuracy. We used L2 regularization with weight decay = 0.001. We have also used data augmentation techniques such as noise injection, time shifting, pitch shifting, time stretching and volume scaling to prevent overfitting.
 
 #### Classification Report
 
@@ -152,12 +179,15 @@ For audio processing, we used window size = 512, hop size = 160 and number of me
 </p>
 
 
-## Results
-
 ## Remarks
+The README.md file contains an overview of the project, it is recommended to open [notebook](https://github.com/yousefkotp/Speech-Emotion-Recognition/blob/main/main.ipynb) as it contains the code and further explanation for the results.
+
 From all of the previous, it is clear that the best model is ExpoNet. The results can be further improved by using a bigger dataset but we will not be doing that in this project.
 
 The next step would be to build a two or three layer neural network which will ensemble the previous models and use the output of each model as an input to the neural network. This will help in improving the results even further. However, we don't have the enough time and computational power to do that in this project.
+
+## Results
+The results are discussed in further details in the [notebook](https://github.com/yousefkotp/Speech-Emotion-Recognition/blob/main/main.ipynb).
 
 ## Contributors
 
