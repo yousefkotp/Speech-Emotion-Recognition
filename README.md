@@ -16,8 +16,19 @@ This project is all about experimenting different set of features for audio repr
   - [Feature Extraction](#feature-extraction)
   - [Building the Models](#building-the-models)
     - [DummyNet](#dummynet)
+      - [Model Architecture](#model-architecture)
+      - [Using Zero Crossing Rate](#using-zero-crossing-rate)
+      - [Using Energy](#using-energy)
+      - [Using Zero Crossing Rate and Energy](#using-zero-crossing-rate-and-energy)
+      - [Using Mel Spectrogram](#using-mel-spectrogram)
     - [RezoNet](#rezonet)
+      - [Model Architecture](#model-architecture-1)
+      - [Training](#training)
+      - [Classification Report](#classification-report)
     - [ExpoNet](#exponet)
+      - [Model Architecture](#model-architecture-2)
+      - [Training](#training-1)
+      - [Classification Report](#classification-report-1)
   - [Results](#results)
   - [Remarks](#remarks)
   - [Contributors](#contributors)
@@ -75,17 +86,78 @@ For this project, we **mainly** decided to go with the following values:
 
 ## Building the Models
 
+For this project, we will build three new models:
+- **DummyNet:** A simple CNN model that takes the raw audio signal as input and uses a series of convolutional layers to extract features from the audio signal. The output of the convolutional layers is then flattened and fed to a series of fully-connected layers to classify the audio signal.
+- **RezoNet:** A CNN model that takes the Mel Spectrogram as a 2D input and uses a series of convolutional layers with rectangular kernels to extract features from the audio signal. The output of the convolutional layers is then flattened and fed to a series of fully-connected layers to classify the audio signal.
+- **ExpoNet:** A CNN model that takes Zero Crossing Rate, Energy and Mel Spectrogram all flattened together as a 1D input and uses a series of convolutional layers with squared size kernels to extract features from the audio signal. The output of the convolutional layers is then flattened and fed to a series of fully-connected layers to classify the audio signal.
 
 ### DummyNet
+As explained from its name, it is one of the most basic CNN models that takes either Zero Crossing Rate, Energy or both or even flattened Mel Spectogram as input. 
+#### Model Architecture
+
+#### Using Zero Crossing Rate
+
+#### Using Energy
+
+#### Using Zero Crossing Rate and Energy
+
+#### Using Mel Spectrogram
+
+
+
 
 ### RezoNet
+RezoNet is a Deep-Net A Lightweight CNN-Based Speech Emotion Recognition Model. It consists of a group of different rectangular shaped kernels in convolutional layer and pooling layer. The model is inspired from the research [Deep-Net: A Lightweight CNN-Based Speech Emotion Recognition System Using Deep Frequency Features](https://www.mdpi.com/1424-8220/20/18/5212). The model is trained on 2D Mel Spectrogram features extracted from the audio files.
+
+#### Model Architecture
+
+<p align="center">
+  <img src="Photos/Deep-Net A Lightweight CNN-Based Speech.png"/>
+</p>
+
+#### Training
+For audio processing, we used window size = 512, hop size = 160 and number of mel = 40. We used Adam optimizer with learning rate = 0.00001 and batch size = 16. We trained the model for 86 epochs and saved the best model based on validation accuracy. We used learning rate decay after 50 epochs with decay rate = 0.1. We used L2 regularization with weight decay = 0.01.
+
+After analysis, it turns out that the model is overfitting. We tried to solve this problem by using data augmentation techniques. We used noise injection, time shifting, pitch shifting, time stretching and volume scaling.
+
+The best checkpoint for the model was saved at epoch 5. We will use this checkpoint for testing.
+
+#### Classification Report
+
+<p align="center">
+  <img src="Photos/RezoNet_report.png"/>
+</p>
+
 
 ### ExpoNet
+
+#### Model Architecture
+The input to the network is expected to be 1D, representing the speech signal which will contains Zero Crossing Rate appended to Energy and appended to 1D flattened Mel Spectogram.
+
+The network architecture begins with a convolutional layer with 1 input channel, 512 output channels, a kernel size of 5, stride of 1 and same padding. This is followed by a ReLU activation function, batch normalization, and max pooling with a kernel size of 5, stride of 2 and same padding. The shape of the input is updated accordingly.
+
+The process is repeated for four additional convolutional layers with similar configurations but varying number of input and output channels. Each convolutional layer is followed by a ReLU activation, batch normalization, and max pooling layer, with the shape updated after each pooling operation.
+
+After the convolutional layers, the features are flattened using the `nn.Flatten()` module. Then, the flattened features are passed through two fully connected layers with 512 and 6 output units, respectively. The first fully connected layer is followed by a ReLU activation and batch normalization. Finally, the output is passed through a softmax function to obtain the predicted probabilities for each emotion class.
+
+The model can be modified to use `Log Softmax` instead of Softmax for faster computation and practicality reasons. However, using Softmax is not a problem in this case since that we are using a GPU to run the model.
+
+#### Training
+For audio processing, we used window size = 512, hop size = 160 and number of mel = 40. We used Adam optimizer with learning rate = 0.00001 and batch size = 8. We trained the model for 10 epochs and saved the best model based on validation accuracy. We used L2 regularization with weight decay = 0.001.
+
+#### Classification Report
+
+<p align="center">
+  <img src="Photos/ExpoNet_report.png"/>
+</p>
+
 
 ## Results
 
 ## Remarks
+From all of the previous, it is clear that the best model is ExpoNet. The results can be further improved by using a bigger dataset but we will not be doing that in this project.
 
+The next step would be to build a two or three layer neural network which will ensemble the previous models and use the output of each model as an input to the neural network. This will help in improving the results even further. However, we don't have the enough time and computational power to do that in this project.
 
 ## Contributors
 
