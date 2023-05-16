@@ -6,7 +6,7 @@ This project is all about experimenting different set of features for audio repr
 **Note:** This README.md file contains an overview of the project, it is recommended to open [notebook](https://github.com/yousefkotp/Speech-Emotion-Recognition/blob/main/main.ipynb) as it contains the code and further explanation for the results.
 
 ## Table of Contents
-- [Speech-Emotion-Recognition](#speech-emotion-recognition)
+- [Speech Emotion Recognition](#speech-emotion-recognition)
   - [Dataset](#dataset)
     - [Preprocessing](#preprocessing)
     - [Data Augmentation](#data-augmentation)
