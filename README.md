@@ -12,7 +12,7 @@ This project is all about experimenting different set of features for audio repr
     - [Preprocessing](#preprocessing)
     - [Data Augmentation](#data-augmentation)
     - [Data Splitting](#data-splitting)
-  - [Feature Extraction](#feature-extraction)
+  - [Features Extraction](#features-extraction)
   - [Building the Models](#building-the-models)
     - [DummyNet](#dummynet)
       - [Model Architecture](#model-architecture)
@@ -61,7 +61,7 @@ For the data splitting, we will use the following ratios:
 
 While the validation set is not used for training the model, it is used for tuning the hyperparameters of the model, such as the learning rate. The validation set is also used for evaluating the model during training to determine when to stop training and prevent overfitting.
 
-## Feature Extraction
+## Features Extraction
 We will process the audio files (wav files) mainly using `librosa` library. We will extract the following features:
 - Zero Crossing Rate
 - Energy
