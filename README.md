@@ -94,7 +94,6 @@ For this project, we will build three new models:
 As explained from its name, it is one of the most basic CNN models that takes either Zero Crossing Rate, Energy or both or even flattened Mel Spectogram as input.
 
 #### Model Architecture
-Convolutional Layers:
 - First Convolutional Layer: 1D convolutional layer with 1 input channel, 512 output channels, and a kernel size of 5 and stride of 1.
 - First Pooling Layer: Max pooling layer with a kernel size of 5 and stride of 2.
 - Second Convolutional Layer: 1D convolutional layer with 512 input channels, 512 output channels, and a kernel size of 5 and stride of 1.
