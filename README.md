@@ -1,7 +1,7 @@
 # Speech Emotion Recognition
 Speech is the most natural way of expressing ourselves as humans. It is only natural then to extend this communication medium to computer applications. We define speech emotion recognition (SER) systems as a collection of methodologies that process and classify speech signals to detect the embedded emotions. 
 
-This project is all about experimenting different set of features for audio representation and different CNN-based architectures for building a good speech emotion recognition (SER) system.
+This project is an exploration of different audio features and CNN-based architectures for building an effective Speech Emotion Recognition (SER) system. The goal is to improve the accuracy of detecting emotions embedded in speech signals. The repository contains code, notebooks, and detailed explanations of the experiments conducted, including feature extraction techniques, model architectures, training procedures, and evaluation metrics. Contributors interested in speech processing and emotion recognition are welcome to explore and contribute to this project.
 
 **Note:** This README.md file contains an overview of the project, it is recommended to open [notebook](https://github.com/yousefkotp/Speech-Emotion-Recognition/blob/main/main.ipynb) as it contains the code and further explanation for the results.
 
