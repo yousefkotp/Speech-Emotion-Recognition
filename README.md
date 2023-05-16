@@ -179,11 +179,11 @@ For audio processing, we used window size = 512, hop size = 160 and number of me
 
 
 ## Remarks
-The README.md file contains an overview of the project, it is recommended to open [notebook](https://github.com/yousefkotp/Speech-Emotion-Recognition/blob/main/main.ipynb) as it contains the code and further explanation for the results.
+- The README.md file contains an overview of the project, it is recommended to open [notebook](https://github.com/yousefkotp/Speech-Emotion-Recognition/blob/main/main.ipynb) as it contains the code and further explanation for the results.
 
-From all of the previous, it is clear that the best model is ExpoNet. The results can be further improved by using a bigger dataset but we will not be doing that in this project.
+- From all of the previous, it is clear that the best model is ExpoNet. The results can be further improved by using a bigger dataset but we will not be doing that in this project.
 
-The next step would be to build a two or three layer neural network which will ensemble the previous models and use the output of each model as an input to the neural network. This will help in improving the results even further. However, we don't have the enough time and computational power to do that in this project.
+- The next step would be to build a two or three layer neural network which will ensemble the previous models and use the output of each model as an input to the neural network. This will help in improving the results even further. However, we don't have the enough time and computational power to do that in this project.
 
 ## Results
 The results are discussed in further details in the [notebook](https://github.com/yousefkotp/Speech-Emotion-Recognition/blob/main/main.ipynb).
