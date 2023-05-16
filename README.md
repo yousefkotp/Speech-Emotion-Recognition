@@ -7,7 +7,6 @@ This project is all about experimenting different set of features for audio repr
 
 ## Table of Contents
 - [Speech-Emotion-Recognition](#speech-emotion-recognition)
-  - [Table of Contents](#table-of-contents)
   - [Dataset](#dataset)
     - [Preprocessing](#preprocessing)
     - [Data Augmentation](#data-augmentation)
